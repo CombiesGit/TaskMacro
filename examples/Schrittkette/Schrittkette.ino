@@ -5,8 +5,6 @@ const byte    tasterPin = 11;
 const byte    ledPin    = 13;
 unsigned long loops     =  0;
 
-#undef taskPriority(pri)
-#define  taskPriority(pri)
 
 
 
@@ -40,7 +38,7 @@ class Taster : public OneShot
     bool taster = digitalRead(pin) ^ invers;
     taskPriority(500); // wird nur beim jedem 500sten Durchlauf ausgefuehrt 
     
-    taskBeginTimer(millis);
+    taskBegin();
     while(1)
     {
         taskStepName(WarteAufTaster);
@@ -71,7 +69,7 @@ class Taster : public OneShot
 Task schrittKette(const byte pin, OneShot * taster)
 {
   taskPriority(100); // wird nur beim jedem 100sten Durchlauf ausgefuehrt 
-  taskBeginTimer(millis);
+  taskBegin();
   while(1)
   {
       taskStepName(schnellesBlinken);
@@ -97,7 +95,7 @@ Task schrittKette(const byte pin, OneShot * taster)
 Task showLoops()
 {
   taskPriority(10000);
-  taskBeginTimer(millis);
+  taskBegin();
   for(;;)
   {
     taskPause(1000);
