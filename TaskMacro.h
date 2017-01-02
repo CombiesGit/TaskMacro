@@ -5,20 +5,33 @@
 typedef  void Task; //  Task Type
 
 
-// grundlegene Worte um einen Task Bereich ein zu grenzen
-#define taskBegin() static int mark = 0; static unsigned long __attribute__((unused)) timeStamp = 0; switch(mark){ case 0:  
-#define taskEnd() }
+// grundlegene Worte um einen Task Bereich einzugrenzen
+#define taskBegin()                                               \
+static int Task_mark = 0;                                         \
+static unsigned long __attribute__((unused)) Task_timeStamp = 0;  \
+switch(Task_mark)                                                 \
+{                                                                 \
+  case 0:  
+  
+  
+#define taskEnd()               \
+  for(;;)                       \
+  {                             \
+          taskSwitch();         \
+  }                             \
+}
 
 
 // Task Kontrol Worte, diese werden Taskwechsel einleiten
-#define taskSwitch() do { mark = __LINE__; return ; case __LINE__: ; } while (0)
-#define taskPause(interval) timeStamp = millis(); while((millis() - timeStamp) < (interval)) taskSwitch()
-#define taskWaitFor(condition) while(!(condition)) taskSwitch();
+#define taskSwitch() do { Task_mark = __LINE__; return ; case __LINE__: ; } while (0)
+#define taskPause(Task_interval) Task_timeStamp = millis(); while((millis() - Task_timeStamp) < (Task_interval)) taskSwitch()
+#define taskWaitFor(Task_condition) while(!(Task_condition)) taskSwitch();
+
 
 
 // Benennen und anspringen von Schrittketten Verzweigungen
-#define taskStepName(STEPNAME) TASKSTEP_##STEPNAME  :
-#define taskJumpTo(STEPNAME)  goto  TASKSTEP_##STEPNAME 
+#define taskStepName(Task_stepname) Task_step_##Task_stepname  :
+#define taskJumpTo(Task_stepname)  goto  Task_step_##Task_stepname 
 
 
 // Task Prioritaet festlegen
@@ -39,9 +52,9 @@ do                                                          \
 
 
 // Mutex , Semaphor, Monitor, Lock
-
+ /* TODO
 // Mutex Abhandlung
-struct Mutex {int8_t flag= 0;};
+struct Mutex {int8_t flag = 0;};
 
 static inline bool mutexFree(Mutex * mutex)
 {
@@ -62,4 +75,4 @@ do{                                   \
    mutexClaim(mutex);                 \
 }while(0)
 
-            
+ */           
