@@ -15,8 +15,8 @@
          
  
 ### Beispiel 
-'''
 
+```
 #include <TaskMacro.h>
 
 Task blink()
@@ -36,8 +36,7 @@ void loop
 {
   blink();
 }
-
-'''         
+```         
          
 
 ### Einzuhaltende Bedingungen
