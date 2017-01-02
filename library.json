@@ -1,0 +1,20 @@
+{
+  "name": "TaskMacro",
+  "keywords": "Task, Multitasking, Cooperative, FSM, EndlicherAutomat",
+  "description": "Simple Multitasking for Arduino",
+  "authors": 
+  {
+      "name": "Ulrich Floer",
+      "email": "git@combie.de",
+      "url": "https://github.com/CombiesGit",
+      "maintainer": true
+  },
+
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/CombiesGit/TaskMacro.git"
+  },
+  "frameworks": "arduino",
+  "platforms": "atmelavr",
+}
